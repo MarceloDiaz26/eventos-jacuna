@@ -13,6 +13,7 @@ export default function HomePage() {
   const [eventos, setEventos] = useState<Evento[]>([]);
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
+  const [password, setPassword] = useState('');
   const [creando, setCreando] = useState(false);
   const [cargando, setCargando] = useState(true);
 
@@ -34,13 +35,14 @@ export default function HomePage() {
       const res = await fetch('/api/eventos', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre: nombre.trim(), descripcion }),
+        body: JSON.stringify({ nombre: nombre.trim(), descripcion, password }),
       });
       const data = await res.json();
       if (res.ok) {
         setEventos((prev) => [data, ...prev]);
         setNombre('');
         setDescripcion('');
+        setPassword('');
       } else {
         alert(data.error || 'Error al crear evento');
         console.error('API error:', data);
@@ -77,6 +79,13 @@ export default function HomePage() {
             onChange={(e) => setDescripcion(e.target.value)}
             style={{ ...styles.input, ...styles.textarea }}
             rows={2}
+          />
+          <input
+            type="password"
+            placeholder="Contraseña para crear (solo si la configuraste)"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={styles.input}
           />
           <button type="submit" disabled={creando} style={styles.btnPrimary}>
             {creando ? 'Creando...' : 'Crear evento'}
