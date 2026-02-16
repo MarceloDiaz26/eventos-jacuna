@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --bg-dark: #0f0f14;
+  --bg-card: #16161e;
+  --bg-input: #1c1c26;
+  --accent: #00d4aa;
+  --accent-dim: #00a88a;
+  --text: #e8e8ed;
+  --text-muted: #8888a0;
+  --border: #2a2a36;
+  --error: #ff6b6b;
+  --radius: 12px;
+}
+
+html,
+body {
+  font-family: 'Outfit', system-ui, sans-serif;
+  background: var(--bg-dark) url('/bg-fondo.png') no-repeat center center fixed;
+  background-size: cover;
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+}
+
+input, textarea {
+  font-family: inherit;
+}
+
+@keyframes animacion-kenburns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.06); }
+}
