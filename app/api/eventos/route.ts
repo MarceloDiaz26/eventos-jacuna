@@ -20,10 +20,17 @@ export async function POST(request: NextRequest) {
     await initDb();
     const sql = getSql();
     const body = await request.json();
-    const { nombre, descripcion } = body;
+    const { nombre, descripcion, password } = body;
 
     if (!nombre?.trim()) {
       return NextResponse.json({ error: 'El nombre es requerido' }, { status: 400 });
+    }
+
+    const createPassword = process.env.EVENT_CREATE_PASSWORD;
+    if (createPassword && createPassword.trim() !== '') {
+      if (password !== createPassword) {
+        return NextResponse.json({ error: 'Contraseña incorrecta' }, { status: 403 });
+      }
     }
 
     const id = uuidv4();
